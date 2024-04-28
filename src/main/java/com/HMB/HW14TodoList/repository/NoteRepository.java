@@ -27,7 +27,8 @@ public class NoteRepository {
     public void deleteById(UUID id) {
         Optional<Note> noteToDelete = findById(id);
         if (noteToDelete.isPresent()) {
-            notes.remove(noteToDelete);
+            Note toDelete = noteToDelete.get();
+            notes.remove(toDelete);
         }
     }
 

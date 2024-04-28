@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Note List</title>
+</head>
+<body>
+<h1>Note List</h1>
+<a href="/note/create">Create New Note</a>
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="note : ${notes}">
+    <td th:text="${note.title}"></td>
+    <td th:text="${note.content}"></td>
+    <td>
+      <form method="get" th:action="@{/note/edit}">
+        <input type="hidden" name="id" th:value="${note.id}">
+        <button type="submit">Edit</button>
+      </form>
+      |
+      <form method="post" th:action="@{/note/delete}">
+        <input type="hidden" name="id" th:value="${note.id}">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
