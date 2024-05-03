@@ -13,10 +13,11 @@ import java.util.UUID;
 
 @Service
 public class NoteService implements NoteServiceInterface{
-    @Autowired private final NoteRepository notes;
+    private final NoteRepository noteRepository;
 
-    public NoteService(NoteRepository notes) {
-        this.notes = notes;
+    @Autowired
+    public NoteService(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
     }
 
     @PostConstruct
@@ -26,27 +27,29 @@ public class NoteService implements NoteServiceInterface{
 
     @Override
     public List<Note> listAll() {
-        return notes.findAllNotes();
+        return noteRepository.findAll();
     }
 
     @Override
     public Note add(Note note) {
-        return notes.createNote(note);
+        return noteRepository.save(note);
     }
 
+    @Override
     public Optional<Note> getById(UUID id) {
-        return notes.findById(id);
+        return noteRepository.findById(id);
     }
 
     @Override
     public void deleteById(UUID id) {
-        notes.deleteById(id);
+        noteRepository.deleteById(id);
     }
 
     @Override
     public void update(Note note) {
-        notes.update(note);
+        noteRepository.save(note);
     }
+
     @PreDestroy
     public void destroy() {
         System.out.println("Stop Application");
