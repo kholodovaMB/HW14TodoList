@@ -2,8 +2,6 @@ package com.HMB.HW14TodoList.service;
 
 import com.HMB.HW14TodoList.entity.Note;
 import com.HMB.HW14TodoList.repository.NoteRepository;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +16,6 @@ public class NoteService implements NoteServiceInterface{
     @Autowired
     public NoteService(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
-    }
-
-    @PostConstruct
-    public void init() {
-        System.out.println("Start Application");
     }
 
     @Override
@@ -48,10 +41,5 @@ public class NoteService implements NoteServiceInterface{
     @Override
     public void update(Note note) {
         noteRepository.save(note);
-    }
-
-    @PreDestroy
-    public void destroy() {
-        System.out.println("Stop Application");
     }
 }
